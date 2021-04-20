@@ -39,6 +39,7 @@ public class MoveLureKeys : MonoBehaviour
         if (collision.gameObject.tag == "Fish")
         {
             GameManager.goingUp = true;
+            Destroy(collision.gameObject);
         }
     }
 }
