@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Sharpshooter : MonoBehaviour
 {
+    public Ammunition ammoType;
+    public GameObject reticle;
+    public Slider recoverySlide;
     private Vector2 mousePos, targetPos;
     private int depth, nearestDepth = -2;
     private GameObject occupancy;
     private float delay = 1.0f;
     private static List<EnemyShip>[] enemyShips;
     private static List<GameObject>[] enemyShipBodies;
+    private bool recovering = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +25,12 @@ public class Sharpshooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        reticle.transform.position = mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             targetPos = mousePos;
-            Fire();
+            if(!recovering) Fire();
         }   
     }
 
@@ -46,15 +51,23 @@ public class Sharpshooter : MonoBehaviour
             else
             {
                 float predictedX = xPos + e.moveSpeed / delay * (e.goingLeft ? -1 : 1);
+                int hitType = IsHit(xPos, e, predictedX);
 
-                if (IsHit(xPos, e.radius, predictedX))
+                if (hitType != 0)
                 {
-                    enemyShips[depth].Remove(e);
-                    Destroy(e);
-                    enemyShipBodies[depth].Remove(g);
-                    Destroy(g);
+                    e.CurrentHealth -= ammoType.damage * hitType;
+
+                    if(e.CurrentHealth <= 0)
+                    {
+                        enemyShips[depth].Remove(e);
+                        Destroy(e);
+                        enemyShipBodies[depth].Remove(g);
+                        Destroy(g);
+                    }
                 }   
             }
+
+            SetRecoilPeriod(ammoType.recoil);
         }
     }
 
@@ -63,14 +76,38 @@ public class Sharpshooter : MonoBehaviour
         return (targetPos.x > xPos && goingLeft) || (targetPos.x < xPos && !goingLeft);
     }
 
-    private bool IsHit(float center, float radius, float impact)
+    private int IsHit(float center, EnemyShip ship, float impact)
     {
-        return Mathf.Abs(center - impact) < radius;
+        int hitType = 0;
+
+        if (Mathf.Abs(center - impact) < ship.innerRadius) hitType = 2;
+        else if (Mathf.Abs(center - impact) < ship.outerRadius) hitType = 1;
+
+        return hitType;
     }
 
     public static void GetShips(List<EnemyShip>[] e, List<GameObject>[] g)
     {
         enemyShips = e;
         enemyShipBodies = g;
+    }
+
+    private void SetRecoilPeriod(float recoil)
+    {
+        recovering = true;
+        recoverySlide.value = 1;
+
+        StartCoroutine(RecoilPeriod(recoil));
+    }
+
+    private IEnumerator RecoilPeriod(float recoil)
+    {
+        while(recoverySlide.value > 0)
+        {
+            recoverySlide.value -= Time.deltaTime / recoil;
+            yield return new WaitForEndOfFrame();
+        }
+        
+        recovering = false;
     }
 }

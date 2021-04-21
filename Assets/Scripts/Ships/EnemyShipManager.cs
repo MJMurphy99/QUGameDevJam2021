@@ -44,8 +44,8 @@ public class EnemyShipManager : MonoBehaviour
             EnemyShip e = enemyShipsSObj[indexY][enemyShipsSObj[indexY].Count - 1];
             e.goingLeft = Random.Range(0, 2) == 0;
 
-            GameObject g = Instantiate(e.baseBody, pos, Quaternion.identity);
-            enemyShipsGObj[indexY].Add(g);
+            e.CurrentBody = Instantiate(e.baseBody, pos, Quaternion.identity);
+            enemyShipsGObj[indexY].Add(e.CurrentBody);
         }
     }
 

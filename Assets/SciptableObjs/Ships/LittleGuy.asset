@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: LittleGuy
   m_EditorClassIdentifier: 
   moveSpeed: 0.25
-  radius: 1
+  outerRadius: 2
+  innerRadius: 1
+  baseHealth: 1
   goingLeft: 0
   baseBody: {fileID: 8997751950501266867, guid: 1f3e851fe08968543b09df5a210a5b15,
     type: 3}
+  healthBar: {fileID: 0}
