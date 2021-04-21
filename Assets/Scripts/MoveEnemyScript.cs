@@ -12,7 +12,7 @@ public class MoveEnemyScript : MonoBehaviour
     void Start()
     {
         fishBody = GetComponent<Rigidbody2D>();
-        fishBody.velocity = new Vector2(-fishSpeed, 1);
+        fishBody.velocity = new Vector2(-fishSpeed, GameManager.verticalMovementSpeed);
     }
 
     // Update is called once per frame
@@ -22,22 +22,22 @@ public class MoveEnemyScript : MonoBehaviour
         {
             if (this.transform.position.x >= rightSideEdge)
             {
-                fishBody.velocity = new Vector2(-fishSpeed, 1);
+                fishBody.velocity = new Vector2(-fishSpeed, GameManager.verticalMovementSpeed);
             }
             else if (this.transform.position.x <= leftSideEdge)
             {
-                fishBody.velocity = new Vector2(fishSpeed, 1);
+                fishBody.velocity = new Vector2(fishSpeed, GameManager.verticalMovementSpeed);
             }
         }
         else
         {
             if (this.transform.position.x >= rightSideEdge)
             {
-                fishBody.velocity = new Vector2(-fishSpeed, -1);
+                fishBody.velocity = new Vector2(-fishSpeed, -GameManager.verticalMovementSpeed);
             }
             else if (this.transform.position.x <= leftSideEdge)
             {
-                fishBody.velocity = new Vector2(fishSpeed, -1);
+                fishBody.velocity = new Vector2(fishSpeed, -GameManager.verticalMovementSpeed);
             }
         }
     }

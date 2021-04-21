@@ -10,6 +10,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         goingUp = false;
-        verticalMovementSpeed = 1f;
+        verticalMovementSpeed = 0.25f;
     }
 }
