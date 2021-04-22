@@ -195,7 +195,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listOfFish:
   - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
+  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
+  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
+  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
+  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
+  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
+  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
   spawnFishTimer: 5
+  depthTimer: 0
+  fishDepthSpawnLevel1: 5
+  fishDepthSpawnLevel2: 10
+  fishDepthSpawnLevel3: 15
+  fishDepthSpawnLevel4: 20
+  fishDepthSpawnLevel5: 25
 --- !u!1 &258288841
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,6 +367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lureSpeed: 4
+  fishDirectionCall: {fileID: 0}
 --- !u!1 &653495595
 GameObject:
   m_ObjectHideFlags: 0
