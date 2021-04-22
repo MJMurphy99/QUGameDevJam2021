@@ -12,4 +12,30 @@ public class GameManager : MonoBehaviour
         goingUp = false;
         verticalMovementSpeed = 0.25f;
     }
+
+    public void Update()
+    {
+        if (goingUp == false)
+        {
+            if (MoveLureMouse.fastLureMode == true)
+            {
+                verticalMovementSpeed = 1f;
+            }
+            else
+            {
+                verticalMovementSpeed = 0.25f;
+            }
+            
+        } else if (goingUp == true)
+        {
+            if (MoveLureMouse.fastLureMode == true)
+            {
+                verticalMovementSpeed = -1f;
+            }
+            else
+            {
+                verticalMovementSpeed = -0.25f;
+            }
+        }
+    }
 }

@@ -8,6 +8,9 @@ TagManager:
   - LeftSideWall
   - Fish
   - DespawnFish
+  - Fish1
+  - Fish2
+  - Fish3
   layers:
   - Default
   - TransparentFX
