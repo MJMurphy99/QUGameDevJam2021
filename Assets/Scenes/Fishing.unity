@@ -194,13 +194,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfFish:
-  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
-  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
-  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
-  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
-  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
-  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
-  - {fileID: 1130762052004029970, guid: 4cef3dcd907622f42bc89ef8a0a91955, type: 3}
+  - {fileID: 4516869986896036085, guid: acfa16fed2fd2114aa952c703abd2eae, type: 3}
+  - {fileID: 7150832174350470959, guid: abf82e3cc870ac04e94f1dc500b668ee, type: 3}
+  - {fileID: 7111609296949035058, guid: 511ae695515d1e24580596058f0cf238, type: 3}
+  - {fileID: 8541780246517548627, guid: 46af9e6fd077af345ae76d71a8cc700e, type: 3}
+  - {fileID: 6807782310641098290, guid: fa4ea8294a715b9419ab0ecba2849e25, type: 3}
+  - {fileID: 6342004113334700621, guid: e253a71bca7be2d49a5829e49e287a13, type: 3}
+  - {fileID: 770250982036062050, guid: 30da561c5b2f01b4c963fc0fcebedb35, type: 3}
   spawnFishTimer: 5
   depthTimer: 0
   fishDepthSpawnLevel1: 5
