@@ -115,7 +115,7 @@ public class MoveLureMouse : MonoBehaviour
             {
                 collision.transform.parent = leftHook.transform;
             }
-            collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.2f, 0);
+            collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.6f, 0);
             collision.transform.Rotate(180, 0, randomFishRotation);
             GlobalControl.fish3++;
             GameManager.goingUp = true;

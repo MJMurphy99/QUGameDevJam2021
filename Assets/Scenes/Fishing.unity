@@ -5075,10 +5075,10 @@ MonoBehaviour:
   depthTimer: 0
   respawnFishTimeSet: 1
   fishDepthSpawnLevel1: 0
-  fishDepthSpawnLevel2: 0
-  fishDepthSpawnLevel3: 0
-  fishDepthSpawnLevel4: 0
-  fishDepthSpawnLevel5: 1
+  fishDepthSpawnLevel2: 5
+  fishDepthSpawnLevel3: 10
+  fishDepthSpawnLevel4: 15
+  fishDepthSpawnLevel5: 20
 --- !u!1 &258288841
 GameObject:
   m_ObjectHideFlags: 0
