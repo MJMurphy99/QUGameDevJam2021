@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static bool goingUp;
     public static float verticalMovementSpeed;
     public float fastLureMovementSpeed, normalLureMovementSpeed;
+    public ParticleSystem bubbleSystem;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,14 +29,8 @@ public class GameManager : MonoBehaviour
             
         } else if (goingUp == true)
         {
-            if (MoveLureMouse.fastLureMode == true)
-            {
-                verticalMovementSpeed = -fastLureMovementSpeed;
-            }
-            else
-            {
-                verticalMovementSpeed = -normalLureMovementSpeed;
-            }
+            bubbleSystem.Stop();
+            verticalMovementSpeed = -normalLureMovementSpeed;
         }
     }
 }

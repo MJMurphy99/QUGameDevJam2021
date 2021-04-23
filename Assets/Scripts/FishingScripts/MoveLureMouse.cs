@@ -10,6 +10,7 @@ public class MoveLureMouse : MonoBehaviour
     public float lureSpeed;
     public static bool fastLureMode;
     public Sprite fastMovingLure, normalLure;
+    public ParticleSystem bubbles;
 
     void Start()
     {
@@ -28,26 +29,29 @@ public class MoveLureMouse : MonoBehaviour
 
         if (Input.GetKey("space"))
         {
-            fastLureMode = true;
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = fastMovingLure;
-            transform.position = Vector3.Lerp(transform.position, fastLurePos.transform.position, 2 * Time.deltaTime);
+            if (GameManager.goingUp == false)
+            {
+                fastLureMode = true;
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = fastMovingLure;
+                bubbles.startSpeed = 10;
+                bubbles.emissionRate = 4;
+                transform.position = Vector3.Lerp(transform.position, fastLurePos.transform.position, 2 * Time.deltaTime);
+            }
         }
         else
         {
             fastLureMode = false;
             this.gameObject.GetComponent<SpriteRenderer>().sprite = normalLure;
+            bubbles.startSpeed = 5;
+            bubbles.emissionRate = 2;
             transform.position = Vector3.Lerp(transform.position, normalLurePos.transform.position, 1 * Time.deltaTime);
         }
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Fish1")
         {
-            //this fixes the jitter bug but adds a strange jump effect
-            Vector3 followXonly = new Vector3(targetPos.x, transform.position.y, transform.position.z);
-            transform.position = Vector3.Lerp(transform.position, followXonly, lureSpeed * Time.deltaTime);
-            //this.transform.position = targetPos;
             Destroy(collision.gameObject);
             GlobalControl.fish1++;
             Debug.Log(GlobalControl.fish1);
@@ -66,7 +70,7 @@ public class MoveLureMouse : MonoBehaviour
             Destroy(collision.gameObject);
             GlobalControl.fish3++;
             GameManager.goingUp = true;
-            
+
         }
     }
 }
