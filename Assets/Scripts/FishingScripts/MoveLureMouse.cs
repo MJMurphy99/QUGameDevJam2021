@@ -12,6 +12,8 @@ public class MoveLureMouse : MonoBehaviour
     public Sprite fastMovingLure, normalLure;
     public ParticleSystem bubbles;
 
+    public float sideBounds;
+
     void Start()
     {
         targetPos = transform.position;
@@ -24,6 +26,12 @@ public class MoveLureMouse : MonoBehaviour
         targetPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
         targetPos = Camera.main.ScreenToWorldPoint(targetPos);
 
+        if (targetPos.x > sideBounds)
+        {
+            targetPos.x = sideBounds;
+        } else if (targetPos.x < -sideBounds) {
+            targetPos.x = -sideBounds;
+        } 
         Vector3 followXonly = new Vector3(targetPos.x, transform.position.y, transform.position.z);
         transform.position = Vector3.Lerp(transform.position, followXonly, lureSpeed * Time.deltaTime);
 

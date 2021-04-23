@@ -5218,6 +5218,7 @@ MonoBehaviour:
   normalLure: {fileID: 939511131109391686, guid: 92cdaf5093b66ef4cac33d321afb5f4e,
     type: 3}
   bubbles: {fileID: 129663981}
+  sideBounds: 4
 --- !u!222 &258288848
 CanvasRenderer:
   m_ObjectHideFlags: 0
