@@ -11,6 +11,9 @@ TagManager:
   - Fish1
   - Fish2
   - Fish3
+  - TipOfPole
+  - WaterLine
+  - PreventBubbleSpawner
   layers:
   - Default
   - TransparentFX

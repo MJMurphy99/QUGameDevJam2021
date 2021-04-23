@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
         {
             bubbleSystem.Stop();
             verticalMovementSpeed = Mathf.Lerp(normalLureMovementSpeed, -normalLureMovementSpeed, 3);
-            //verticalMovementSpeed = -normalLureMovementSpeed;
         }
     }
 }

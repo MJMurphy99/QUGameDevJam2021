@@ -13,11 +13,13 @@ public class MoveLureMouse : MonoBehaviour
     public ParticleSystem bubbles;
     public int randomFishRotation, randomHookAttach;
     public float sideBounds;
+    public bool aboveWater;
 
     void Start()
     {
         targetPos = transform.position;
         fastLureMode = false;
+        aboveWater = true;
     }
 
     void Update()
@@ -26,8 +28,10 @@ public class MoveLureMouse : MonoBehaviour
         float distance = transform.position.z - Camera.main.transform.position.z;
         targetPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
         targetPos = Camera.main.ScreenToWorldPoint(targetPos);
-
-        if (targetPos.x > sideBounds)
+        if (aboveWater == true)
+        {
+            targetPos.x = 0;
+        } else if (targetPos.x > sideBounds)
         {
             targetPos.x = sideBounds;
         } else if (targetPos.x < -sideBounds) {
@@ -57,7 +61,7 @@ public class MoveLureMouse : MonoBehaviour
             bubbles.emissionRate = 2;
             transform.position = Vector3.Lerp(transform.position, normalLurePos.transform.position, 1 * Time.deltaTime);
         }
-        /******************MOUSE MOVEMENT********************/
+        /******************SPEED INCREASE********************/
 
         //couple of random ranges that get changed during update to make them more interesting
         randomFishRotation = Random.Range(60, 100);
@@ -120,6 +124,29 @@ public class MoveLureMouse : MonoBehaviour
             GlobalControl.fish3++;
             GameManager.goingUp = true;
 
+        }
+
+
+    }
+
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "PreventBubbleSpawner")
+        {
+            aboveWater = true;
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        aboveWater = false;
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "TipOfPole")
+        {
+            Debug.Log("ok we basically done");
         }
     }
 }
