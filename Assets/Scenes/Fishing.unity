@@ -203,7 +203,7 @@ MonoBehaviour:
   - {fileID: 770250982036062050, guid: 30da561c5b2f01b4c963fc0fcebedb35, type: 3}
   spawnFishTimer: 2
   depthTimer: 0
-  respawnFishTimeSet: 3
+  respawnFishTimeSet: 1
   fishDepthSpawnLevel1: 5
   fishDepthSpawnLevel2: 10
   fishDepthSpawnLevel3: 15
@@ -513,7 +513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &733211680
 Transform:
   m_ObjectHideFlags: 0
@@ -653,7 +653,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838121283}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -2.61, y: 1.4, z: 0}
+  m_LocalPosition: {x: -2.82, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1565958140}
@@ -717,7 +717,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &866287294
 Transform:
   m_ObjectHideFlags: 0
@@ -1077,6 +1077,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e32c22e5062f94a8fa7172cfd1d452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fastLureMovementSpeed: 3
+  normalLureMovementSpeed: 2
 --- !u!114 &1786071696
 MonoBehaviour:
   m_ObjectHideFlags: 0

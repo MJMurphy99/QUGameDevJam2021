@@ -6,11 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public static bool goingUp;
     public static float verticalMovementSpeed;
+    public float fastLureMovementSpeed, normalLureMovementSpeed;
     // Start is called before the first frame update
     void Start()
     {
         goingUp = false;
-        verticalMovementSpeed = 0.25f;
     }
 
     public void Update()
@@ -19,22 +19,22 @@ public class GameManager : MonoBehaviour
         {
             if (MoveLureMouse.fastLureMode == true)
             {
-                verticalMovementSpeed = 2f;
+                verticalMovementSpeed = fastLureMovementSpeed;
             }
             else
             {
-                verticalMovementSpeed = 1f;
+                verticalMovementSpeed = normalLureMovementSpeed;
             }
             
         } else if (goingUp == true)
         {
             if (MoveLureMouse.fastLureMode == true)
             {
-                verticalMovementSpeed = -2f;
+                verticalMovementSpeed = -fastLureMovementSpeed;
             }
             else
             {
-                verticalMovementSpeed = -1f;
+                verticalMovementSpeed = -normalLureMovementSpeed;
             }
         }
     }

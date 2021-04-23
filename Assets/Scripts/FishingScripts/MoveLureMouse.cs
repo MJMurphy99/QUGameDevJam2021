@@ -30,7 +30,7 @@ public class MoveLureMouse : MonoBehaviour
         {
             fastLureMode = true;
             this.gameObject.GetComponent<SpriteRenderer>().sprite = fastMovingLure;
-            transform.position = Vector3.Lerp(transform.position, fastLurePos.transform.position, 1 * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, fastLurePos.transform.position, 2 * Time.deltaTime);
         }
         else
         {
@@ -44,24 +44,29 @@ public class MoveLureMouse : MonoBehaviour
     {
         if (collision.gameObject.tag == "Fish1")
         {
+            //this fixes the jitter bug but adds a strange jump effect
+            Vector3 followXonly = new Vector3(targetPos.x, transform.position.y, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, followXonly, lureSpeed * Time.deltaTime);
+            //this.transform.position = targetPos;
+            Destroy(collision.gameObject);
             GlobalControl.fish1++;
             Debug.Log(GlobalControl.fish1);
             GameManager.goingUp = true;
-            Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.tag == "Fish2")
         {
+            Destroy(collision.gameObject);
             GlobalControl.fish2++;
             GameManager.goingUp = true;
-            Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.tag == "Fish3")
         {
+            Destroy(collision.gameObject);
             GlobalControl.fish3++;
             GameManager.goingUp = true;
-            Destroy(collision.gameObject);
+            
         }
     }
 }

@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8b10f746b4f7c74684eb9a13b71419a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishSpeed: 5
+  fishSpeed: 3
   leftSideEdge: -3.5
   rightSideEdge: 3.5
   goingRight: 0
