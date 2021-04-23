@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class MoveLureMouse : MonoBehaviour
 {
     private Vector3 targetPos;
-    public Transform normalLurePos, fastLurePos;
+    public Transform normalLurePos, fastLurePos, leftHook, rightHook;
     public float lureSpeed;
     public static bool fastLureMode;
     public Sprite fastMovingLure, normalLure;
     public ParticleSystem bubbles;
-
+    public int randomFishRotation, randomHookAttach;
     public float sideBounds;
 
     void Start()
@@ -22,6 +22,7 @@ public class MoveLureMouse : MonoBehaviour
 
     void Update()
     {
+        /******************MOUSE MOVEMENT********************/
         float distance = transform.position.z - Camera.main.transform.position.z;
         targetPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance);
         targetPos = Camera.main.ScreenToWorldPoint(targetPos);
@@ -34,7 +35,9 @@ public class MoveLureMouse : MonoBehaviour
         } 
         Vector3 followXonly = new Vector3(targetPos.x, transform.position.y, transform.position.z);
         transform.position = Vector3.Lerp(transform.position, followXonly, lureSpeed * Time.deltaTime);
+        /******************MOUSE MOVEMENT********************/
 
+        /******************SPEED INCREASE********************/
         if (Input.GetKey("space"))
         {
             if (GameManager.goingUp == false)
@@ -54,28 +57,66 @@ public class MoveLureMouse : MonoBehaviour
             bubbles.emissionRate = 2;
             transform.position = Vector3.Lerp(transform.position, normalLurePos.transform.position, 1 * Time.deltaTime);
         }
+        /******************MOUSE MOVEMENT********************/
+
+        //couple of random ranges that get changed during update to make them more interesting
+        randomFishRotation = Random.Range(60, 100);
+        randomHookAttach = Random.Range(0, 10);
+          
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Fish1")
         {
-            Destroy(collision.gameObject);
+            collision.transform.localScale = new Vector3(1, 1, 1);
+            collision.GetComponent<MoveEnemyScript>().enabled = false;
+            if(randomHookAttach > 5)
+            {
+                collision.transform.parent = rightHook.transform;
+            }
+            else
+            {
+                collision.transform.parent = leftHook.transform;
+            }
+            collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.2f, 0);
+            collision.transform.Rotate(180, 0, randomFishRotation);
             GlobalControl.fish1++;
-            Debug.Log(GlobalControl.fish1);
             GameManager.goingUp = true;
         }
 
         if (collision.gameObject.tag == "Fish2")
         {
-            Destroy(collision.gameObject);
+            collision.transform.localScale = new Vector3(1, 1, 1);
+            collision.GetComponent<MoveEnemyScript>().enabled = false;
+            if (randomHookAttach > 5)
+            {
+                collision.transform.parent = rightHook.transform;
+            }
+            else
+            {
+                collision.transform.parent = leftHook.transform;
+            }
+            collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.55f, 0);
+            collision.transform.Rotate(180, 0, randomFishRotation);
             GlobalControl.fish2++;
             GameManager.goingUp = true;
         }
 
         if (collision.gameObject.tag == "Fish3")
         {
-            Destroy(collision.gameObject);
+            collision.transform.localScale = new Vector3(1, 1, 1);
+            collision.GetComponent<MoveEnemyScript>().enabled = false;
+            if (randomHookAttach > 5)
+            {
+                collision.transform.parent = rightHook.transform;
+            }
+            else
+            {
+                collision.transform.parent = leftHook.transform;
+            }
+            collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.2f, 0);
+            collision.transform.Rotate(180, 0, randomFishRotation);
             GlobalControl.fish3++;
             GameManager.goingUp = true;
 

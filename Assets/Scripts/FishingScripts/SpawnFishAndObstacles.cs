@@ -63,7 +63,7 @@ public class SpawnFishAndObstacles : MonoBehaviour
             {
                 if (spawnFishTimer < 0f)
                 {
-                    Instantiate(listOfFish[Random.Range(4, 6)], new Vector3(Random.Range(-9, 9), -5, 0), Quaternion.identity);
+                    Instantiate(listOfFish[Random.Range(3, 6)], new Vector3(Random.Range(-9, 9), -5, 0), Quaternion.identity);
                     spawnFishTimer = respawnFishTimeSet;
                 }
             }
