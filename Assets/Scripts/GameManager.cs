@@ -19,22 +19,22 @@ public class GameManager : MonoBehaviour
         {
             if (MoveLureMouse.fastLureMode == true)
             {
-                verticalMovementSpeed = 1f;
+                verticalMovementSpeed = 2f;
             }
             else
             {
-                verticalMovementSpeed = 0.25f;
+                verticalMovementSpeed = 1f;
             }
             
         } else if (goingUp == true)
         {
             if (MoveLureMouse.fastLureMode == true)
             {
-                verticalMovementSpeed = -1f;
+                verticalMovementSpeed = -2f;
             }
             else
             {
-                verticalMovementSpeed = -0.25f;
+                verticalMovementSpeed = -1f;
             }
         }
     }

@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoveLureMouse : MonoBehaviour
 {
     private Vector3 targetPos;
+    public Transform normalLurePos, fastLurePos;
     public float lureSpeed;
     public static bool fastLureMode;
-    public GameManager fishDirectionCall;
+    public Sprite fastMovingLure, normalLure;
 
     void Start()
     {
@@ -27,10 +29,14 @@ public class MoveLureMouse : MonoBehaviour
         if (Input.GetKey("space"))
         {
             fastLureMode = true;
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = fastMovingLure;
+            transform.position = Vector3.Lerp(transform.position, fastLurePos.transform.position, 1 * Time.deltaTime);
         }
         else
         {
             fastLureMode = false;
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = normalLure;
+            transform.position = Vector3.Lerp(transform.position, normalLurePos.transform.position, 1 * Time.deltaTime);
         }
     }
 
@@ -46,14 +52,14 @@ public class MoveLureMouse : MonoBehaviour
 
         if (collision.gameObject.tag == "Fish2")
         {
-            GlobalControl.fish1++;
+            GlobalControl.fish2++;
             GameManager.goingUp = true;
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.tag == "Fish3")
         {
-            GlobalControl.fish1++;
+            GlobalControl.fish3++;
             GameManager.goingUp = true;
             Destroy(collision.gameObject);
         }
