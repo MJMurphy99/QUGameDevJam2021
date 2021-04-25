@@ -22,7 +22,8 @@ public class LookOut : MonoBehaviour
 
     public static void FightShips()
     {
-        if(enemyShipSpotted)
+        enemyShipSpotted = true;
+        if (enemyShipSpotted)
         {
             SceneManager.LoadScene("ShipFight");
         }

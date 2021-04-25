@@ -15,6 +15,8 @@ public class MoveLureMouse : MonoBehaviour
     public float sideBounds;
     public bool aboveWater;
 
+    public LookOut startFight;
+
     void Start()
     {
         targetPos = transform.position;
@@ -149,6 +151,7 @@ public class MoveLureMouse : MonoBehaviour
     {
         if(collision.gameObject.tag == "TipOfPole")
         {
+            print("apple");
             LookOut.FightShips();
         }
     }
