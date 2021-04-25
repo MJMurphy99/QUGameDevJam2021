@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LookOut : MonoBehaviour
 {
-    private static bool enemyShipSpotted = true; 
+    private static bool enemyShipSpotted = false; 
 
     public void ReturnToLookOut()
     {

@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Sharpshooter : MonoBehaviour
 {
-    public Ammunition ammoType;
+    public Ammunition[] ammoType;
+    public Ammunition currentAmmo;
+    public Image ammoDisplay;
+    public TextMeshProUGUI qty;
     public GameObject reticle;
     public Slider recoverySlide;
     private Vector2 mousePos, targetPos;
@@ -14,6 +18,14 @@ public class Sharpshooter : MonoBehaviour
     private float delay = 1.0f;
     private static List<EnemyShip> enemyShips;
     private bool recovering = false;
+    int scroll = 0, delta = 0;
+
+    private void Start()
+    {
+        currentAmmo = ammoType[0];
+        ammoDisplay.sprite = currentAmmo.display;
+        qty.text = "x " + GlobalControl.fish[scroll];
+    }
 
     // Update is called once per frame
     void Update()
@@ -23,8 +35,12 @@ public class Sharpshooter : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0))
         {
             targetPos = mousePos;
-            if(!recovering) Fire();
-        }   
+            if(!recovering && GlobalControl.fish[scroll] > 0) Fire();
+        }
+
+        delta = (int)Input.mouseScrollDelta.y;
+        if (delta != 0)
+            CurrentAmmoType();
     }
 
     private void Fire()
@@ -50,7 +66,7 @@ public class Sharpshooter : MonoBehaviour
 
             if (hitType != 0)
             {
-                e.CurrentHealth -= ammoType.damage * hitType;
+                e.CurrentHealth -= currentAmmo.damage * hitType;
 
                 if(e.CurrentHealth <= 0)
                 {
@@ -60,8 +76,9 @@ public class Sharpshooter : MonoBehaviour
                 }
             }   
             //}
-
-            SetRecoilPeriod(ammoType.recoil);
+            SetRecoilPeriod(currentAmmo.recoil);
+            GlobalControl.fish[scroll]--;
+            qty.text = "x " + GlobalControl.fish[scroll];
         }
     }
 
@@ -102,5 +119,15 @@ public class Sharpshooter : MonoBehaviour
         }
         
         recovering = false;
+    }
+
+    private void CurrentAmmoType()
+    {
+        scroll = (scroll + delta) % ammoType.Length;
+        if (scroll < 0) scroll = ammoType.Length - 1;
+
+        currentAmmo = ammoType[scroll];
+        ammoDisplay.sprite = currentAmmo.display;
+        qty.text = "x " + GlobalControl.fish[scroll];
     }
 }

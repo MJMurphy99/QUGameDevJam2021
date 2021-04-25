@@ -5,7 +5,8 @@ using UnityEngine;
 public class GlobalControl : MonoBehaviour
 {
     public static GlobalControl Instance;
-    public static int fish1, fish2, fish3; 
+    //public static int fish1 = 0, fish2 = 0, fish3 = 0;
+    public static float[] fish = new float[4];
 
     void Awake()
     {
@@ -13,6 +14,7 @@ public class GlobalControl : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             Instance = this;
+            fish[0] = Mathf.Infinity;
         }
         else if (Instance != this)
         {

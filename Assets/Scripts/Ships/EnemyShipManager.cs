@@ -37,6 +37,7 @@ public class EnemyShipManager : MonoBehaviour
             e.goingLeft = Random.Range(0, 2) == 0;
 
             e.CurrentBody = Instantiate(e.baseBody, pos, Quaternion.identity);
+            e.CurrentBody.GetComponent<SpriteRenderer>().flipX = !e.goingLeft;
         }
     }
 
@@ -53,7 +54,13 @@ public class EnemyShipManager : MonoBehaviour
             enemyShipsSObj[i].CurrentBody.transform.position += Vector3.right * magnitude;
 
             Vector2 pos = enemyShipsSObj[i].CurrentBody.transform.position;
-            if (pos.x < negX || pos.x > posX) e.goingLeft = !e.goingLeft;
+            if (pos.x < negX || pos.x > posX)
+            {
+                e.goingLeft = !e.goingLeft;
+                e.CurrentBody.GetComponent<SpriteRenderer>().flipX = !e.goingLeft;
+            }
+
+            if (!e.loadingAttack) StartCoroutine(e.Fire());
         }
         if(dead == enemyShipsSObj.Count) ReturnToLookOut();
     }

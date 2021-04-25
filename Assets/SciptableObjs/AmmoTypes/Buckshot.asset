@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa03db167b7de7645a18c6a4ca998c52, type: 3}
-  m_Name: Shrimp
+  m_Name: Buckshot
   m_EditorClassIdentifier: 
   speed: 0
-  recoil: 0.1
-  damage: 0.1
-  range: 1
-  display: {fileID: 9090693817350449208, guid: 9c03367b255b0a543867cbb9f3b5dc16, type: 3}
+  recoil: 1
+  damage: 0.5
+  range: 0
+  display: {fileID: -5566867634462037810, guid: 379b263a5fbc3444b86bdc3e6feabf87,
+    type: 3}

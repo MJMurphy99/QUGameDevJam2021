@@ -85,7 +85,7 @@ public class MoveLureMouse : MonoBehaviour
             }
             collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.2f, 0);
             collision.transform.Rotate(180, 0, randomFishRotation);
-            GlobalControl.fish1++;
+            GlobalControl.fish[1]++;
             GameManager.goingUp = true;
         }
 
@@ -103,7 +103,7 @@ public class MoveLureMouse : MonoBehaviour
             }
             collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.55f, 0);
             collision.transform.Rotate(180, 0, randomFishRotation);
-            GlobalControl.fish2++;
+            GlobalControl.fish[2]++;
             GameManager.goingUp = true;
         }
 
@@ -121,7 +121,7 @@ public class MoveLureMouse : MonoBehaviour
             }
             collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.6f, 0);
             collision.transform.Rotate(180, 0, randomFishRotation);
-            GlobalControl.fish3++;
+            GlobalControl.fish[3]++;
             GameManager.goingUp = true;
 
         }

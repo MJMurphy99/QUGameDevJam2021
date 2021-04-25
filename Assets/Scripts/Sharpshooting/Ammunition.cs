@@ -7,5 +7,6 @@ public class Ammunition : ScriptableObject
 {
     public float speed, recoil, damage;
     public int range;
+    public Sprite display;
 
 }
