@@ -18,7 +18,6 @@ public class LookOut : MonoBehaviour
     public IEnumerator LookForEnemyShips()
     {
         float randTime = Random.Range(60, 181);
-        print(randTime);
         yield return new WaitForSeconds(randTime);
         enemyShipSpotted = true;
         shipSpotted.gameObject.SetActive(true);

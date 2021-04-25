@@ -70,6 +70,7 @@ public class Sharpshooter : MonoBehaviour
 
                 if(e.CurrentHealth <= 0)
                 {
+                    if (e.loadingAttack) StopCoroutine(e.Fire());
                     enemyShips.Remove(e);
                     Destroy(e);
                     Destroy(g);

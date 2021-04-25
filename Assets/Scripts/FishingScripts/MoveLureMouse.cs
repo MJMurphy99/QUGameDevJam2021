@@ -155,10 +155,7 @@ public class MoveLureMouse : MonoBehaviour
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "TipOfPole")
-        {
-            LookOut.FightShips();
-        }
+        LookOut.FightShips();
         GameManager.GoingUp = false;
         for (int i = 0; i < leftHook.transform.childCount; i++)
         {
