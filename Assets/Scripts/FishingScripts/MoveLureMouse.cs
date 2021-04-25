@@ -22,6 +22,7 @@ public class MoveLureMouse : MonoBehaviour
         targetPos = transform.position;
         fastLureMode = false;
         aboveWater = true;
+        FindObjectOfType<LookOut>().ReturnToLookOut();
     }
 
     void Update()
@@ -46,7 +47,7 @@ public class MoveLureMouse : MonoBehaviour
         /******************SPEED INCREASE********************/
         if (Input.GetKey("space"))
         {
-            if (GameManager.goingUp == false)
+            if (GameManager.GoingUp == false)
             {
                 fastLureMode = true;
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = fastMovingLure;
@@ -88,7 +89,7 @@ public class MoveLureMouse : MonoBehaviour
             collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.2f, 0);
             collision.transform.Rotate(180, 0, randomFishRotation);
             GlobalControl.fish[1]++;
-            GameManager.goingUp = true;
+            GameManager.GoingUp = true;
         }
 
         if (collision.gameObject.tag == "Fish2")
@@ -106,7 +107,7 @@ public class MoveLureMouse : MonoBehaviour
             collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.55f, 0);
             collision.transform.Rotate(180, 0, randomFishRotation);
             GlobalControl.fish[2]++;
-            GameManager.goingUp = true;
+            GameManager.GoingUp = true;
         }
 
         if (collision.gameObject.tag == "Fish3")
@@ -124,7 +125,7 @@ public class MoveLureMouse : MonoBehaviour
             collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.6f, 0);
             collision.transform.Rotate(180, 0, randomFishRotation);
             GlobalControl.fish[3]++;
-            GameManager.goingUp = true;
+            GameManager.GoingUp = true;
 
         }
 
@@ -151,8 +152,16 @@ public class MoveLureMouse : MonoBehaviour
     {
         if(collision.gameObject.tag == "TipOfPole")
         {
-            print("apple");
             LookOut.FightShips();
+        }
+        GameManager.GoingUp = false;
+        for (int i = 0; i < leftHook.transform.childCount; i++)
+        {
+            Destroy(leftHook.transform.GetChild(i).gameObject);
+        } 
+        for (int i = 0; i < rightHook.transform.childCount; i++)
+        {
+            Destroy(rightHook.transform.GetChild(i).gameObject);
         }
     }
 }
