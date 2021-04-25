@@ -1441,7 +1441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ship: {fileID: 11400000, guid: 2ad0f789c254ada48b479103b9cc2947, type: 2}
   min: 1
-  max: 5
+  max: 3
   negX: -10
   posX: 10
   negY: -4

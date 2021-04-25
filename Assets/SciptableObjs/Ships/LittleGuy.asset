@@ -16,7 +16,7 @@ MonoBehaviour:
   outerRadius: 3
   innerRadius: 1
   baseHealth: 1
-  damage: 0
+  damage: 1
   goingLeft: 0
   loadingAttack: 0
   baseBody: {fileID: 8997751950501266867, guid: 1f3e851fe08968543b09df5a210a5b15,
