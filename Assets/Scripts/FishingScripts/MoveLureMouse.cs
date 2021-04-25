@@ -14,6 +14,7 @@ public class MoveLureMouse : MonoBehaviour
     public int randomFishRotation, randomHookAttach;
     public float sideBounds;
     public bool aboveWater;
+    private Scoreing s;
 
     public LookOut startFight;
 
@@ -23,6 +24,7 @@ public class MoveLureMouse : MonoBehaviour
         fastLureMode = false;
         aboveWater = true;
         FindObjectOfType<LookOut>().ReturnToLookOut();
+        s = FindObjectOfType<Scoreing>();
     }
 
     void Update()
@@ -89,6 +91,7 @@ public class MoveLureMouse : MonoBehaviour
             collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.2f, 0);
             collision.transform.Rotate(180, 0, randomFishRotation);
             GlobalControl.fish[1]++;
+            s.Score++;
             GameManager.GoingUp = true;
         }
 
@@ -107,6 +110,7 @@ public class MoveLureMouse : MonoBehaviour
             collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.55f, 0);
             collision.transform.Rotate(180, 0, randomFishRotation);
             GlobalControl.fish[2]++;
+            s.Score++;
             GameManager.GoingUp = true;
         }
 
@@ -125,6 +129,7 @@ public class MoveLureMouse : MonoBehaviour
             collision.transform.localPosition = new Vector3(Random.Range(-0.1f, 0.1f), -0.6f, 0);
             collision.transform.Rotate(180, 0, randomFishRotation);
             GlobalControl.fish[3]++;
+            s.Score++;
             GameManager.GoingUp = true;
 
         }

@@ -7,6 +7,7 @@ public class GlobalControl : MonoBehaviour
     public static GlobalControl Instance;
     //public static int fish1 = 0, fish2 = 0, fish3 = 0;
     public static float[] fish = new float[4];
+    public static int score = 0;
 
     void Awake()
     {
