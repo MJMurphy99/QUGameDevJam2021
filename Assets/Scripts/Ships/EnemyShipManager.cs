@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyShipManager : MonoBehaviour
 {
@@ -8,13 +9,12 @@ public class EnemyShipManager : MonoBehaviour
     public int min, max;
     public int negX, posX, negY, posY;
 
-    private List<EnemyShip>[] enemyShipsSObj;
-    private List<GameObject>[] enemyShipsGObj;
+    private List<EnemyShip> enemyShipsSObj;
     // Start is called before the first frame update
     void Start()
     {
         PlaceShips();
-        Sharpshooter.GetShips(enemyShipsSObj, enemyShipsGObj);
+        Sharpshooter.GetShips(enemyShipsSObj);
     }
 
     // Update is called once per frame
@@ -26,44 +26,40 @@ public class EnemyShipManager : MonoBehaviour
     private void PlaceShips()
     {
         int randomNum = Random.Range(min, max);
-        enemyShipsSObj = new List<EnemyShip>[posY - negY];
-        enemyShipsGObj = new List<GameObject>[posY - negY];
-
+        enemyShipsSObj = new List<EnemyShip>();
         for(int i = 0; i < randomNum; i++)
         {
             Vector2 pos = new Vector2(Random.Range(negX, posX), Random.Range(negY, posY));
             int indexY = negY < 0 ? Mathf.Abs(negY) + (int)pos.y : (int)pos.y;
 
-            if (enemyShipsSObj[indexY] == null)
-            {
-                enemyShipsSObj[indexY] = new List<EnemyShip>();
-                enemyShipsGObj[indexY] = new List<GameObject>();
-            }
-
-            enemyShipsSObj[indexY].Add(Instantiate(ship));
-            EnemyShip e = enemyShipsSObj[indexY][enemyShipsSObj[indexY].Count - 1];
+            enemyShipsSObj.Add(Instantiate(ship));
+            EnemyShip e = enemyShipsSObj[i];
             e.goingLeft = Random.Range(0, 2) == 0;
 
             e.CurrentBody = Instantiate(e.baseBody, pos, Quaternion.identity);
-            enemyShipsGObj[indexY].Add(e.CurrentBody);
         }
     }
 
     private void MoveShips()
     {
-        for(int i = 0; i < enemyShipsGObj.Length; i++)
+        int dead = 0;
+        for(int i = 0; i < enemyShipsSObj.Count; i++)
         {
-            if (enemyShipsGObj[i] == null) continue;
+            if (enemyShipsSObj[i] == null)
+                continue;
 
-            for (int j = 0; j < enemyShipsGObj[i].Count; j++)
-            {
-                EnemyShip e = enemyShipsSObj[i][j];
-                float magnitude = e.moveSpeed * Time.deltaTime * (e.goingLeft ? -1 : 1);
-                enemyShipsGObj[i][j].transform.position += Vector3.right * magnitude;
+            EnemyShip e = enemyShipsSObj[i];
+            float magnitude = e.moveSpeed * Time.deltaTime * (e.goingLeft ? -1 : 1);
+            enemyShipsSObj[i].CurrentBody.transform.position += Vector3.right * magnitude;
 
-                Vector2 pos = enemyShipsGObj[i][j].transform.position;
-                if (pos.x < negX || pos.x > posX) e.goingLeft = !e.goingLeft;
-            }
+            Vector2 pos = enemyShipsSObj[i].CurrentBody.transform.position;
+            if (pos.x < negX || pos.x > posX) e.goingLeft = !e.goingLeft;
         }
+        if(dead == enemyShipsSObj.Count) ReturnToLookOut();
+    }
+
+    private void ReturnToLookOut()
+    {
+        SceneManager.LoadScene("Fishing");
     }
 }

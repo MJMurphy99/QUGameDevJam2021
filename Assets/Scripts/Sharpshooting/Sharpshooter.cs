@@ -9,18 +9,11 @@ public class Sharpshooter : MonoBehaviour
     public GameObject reticle;
     public Slider recoverySlide;
     private Vector2 mousePos, targetPos;
-    private int depth, nearestDepth = -2;
+    //private int depth, nearestDepth = -2;
     private GameObject occupancy;
     private float delay = 1.0f;
-    private static List<EnemyShip>[] enemyShips;
-    private static List<GameObject>[] enemyShipBodies;
+    private static List<EnemyShip> enemyShips;
     private bool recovering = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -36,36 +29,37 @@ public class Sharpshooter : MonoBehaviour
 
     private void Fire()
     {
-        depth = Mathf.RoundToInt(targetPos.y) - nearestDepth;
+        //depth = Mathf.RoundToInt(targetPos.y) - nearestDepth;
 
-        if (enemyShips[depth] == null) return;
-
-        for(int i = 0; i < enemyShips[depth].Count; i++)
+        for(int i = 0; i < enemyShips.Count; i++)
         {
-            EnemyShip e = enemyShips[depth][i];
-            GameObject g = enemyShipBodies[depth][i];
+            EnemyShip e = enemyShips[i];
+            GameObject g = e.CurrentBody;
+
+            if (Mathf.RoundToInt(g.transform.position.y) != Mathf.RoundToInt(targetPos.y)) continue;
 
             float xPos = g.transform.position.x;
 
-            if (IsPasssed(xPos, e.goingLeft)) continue;
-            else
+            //If we want to have delay to impact, use these commented sections
+            //if (IsPasssed(xPos, e.goingLeft)) continue;
+            //else
+            //{                    
+            //xPos + e.moveSpeed / delay * (e.goingLeft ? -1 : 1); If we want to have delay to impact, use this
+            float impactX = targetPos.x;
+            int hitType = IsHit(xPos, e, impactX);
+
+            if (hitType != 0)
             {
-                float predictedX = xPos + e.moveSpeed / delay * (e.goingLeft ? -1 : 1);
-                int hitType = IsHit(xPos, e, predictedX);
+                e.CurrentHealth -= ammoType.damage * hitType;
 
-                if (hitType != 0)
+                if(e.CurrentHealth <= 0)
                 {
-                    e.CurrentHealth -= ammoType.damage * hitType;
-
-                    if(e.CurrentHealth <= 0)
-                    {
-                        enemyShips[depth].Remove(e);
-                        Destroy(e);
-                        enemyShipBodies[depth].Remove(g);
-                        Destroy(g);
-                    }
-                }   
-            }
+                    enemyShips.Remove(e);
+                    Destroy(e);
+                    Destroy(g);
+                }
+            }   
+            //}
 
             SetRecoilPeriod(ammoType.recoil);
         }
@@ -86,10 +80,9 @@ public class Sharpshooter : MonoBehaviour
         return hitType;
     }
 
-    public static void GetShips(List<EnemyShip>[] e, List<GameObject>[] g)
+    public static void GetShips(List<EnemyShip> e)
     {
         enemyShips = e;
-        enemyShipBodies = g;
     }
 
     private void SetRecoilPeriod(float recoil)

@@ -702,8 +702,8 @@ MonoBehaviour:
   ship: {fileID: 11400000, guid: 2ad0f789c254ada48b479103b9cc2947, type: 2}
   min: 1
   max: 8
-  negX: -15
-  posX: 15
+  negX: -10
+  posX: 10
   negY: -2
   posY: 5
 --- !u!4 &1884267039
@@ -714,7 +714,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884267037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3128582, y: -1.0754845, z: -0.6956465}
+  m_LocalPosition: {x: 0, y: 0, z: -0.06956465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

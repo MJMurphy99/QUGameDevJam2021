@@ -139,14 +139,17 @@ public class MoveLureMouse : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        aboveWater = false;
+        if (collision.gameObject.tag == "PreventBubbleSpawner")
+        {
+            aboveWater = false;
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "TipOfPole")
         {
-            Debug.Log("ok we basically done");
+            LookOut.FightShips();
         }
     }
 }
