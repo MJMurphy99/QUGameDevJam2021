@@ -35,7 +35,7 @@ public class Sharpshooter : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0))
         {
             targetPos = mousePos;
-            if(!recovering && GlobalControl.fish[scroll] > 0) Fire();
+            if(!recovering/* && GlobalControl.fish[scroll] > 0*/) Fire();
         }
 
         delta = (int)Input.mouseScrollDelta.y;
@@ -70,7 +70,10 @@ public class Sharpshooter : MonoBehaviour
 
                 if(e.CurrentHealth <= 0)
                 {
-                    if (e.loadingAttack) StopCoroutine(e.Fire());
+                    if (e.loadingAttack != null)
+                    {
+                        StopCoroutine(e.loadingAttack);
+                    }
                     enemyShips.Remove(e);
                     Destroy(e);
                     Destroy(g);

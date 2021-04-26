@@ -25,7 +25,7 @@ public class EnemyShipManager : MonoBehaviour
 
     private void PlaceShips()
     {
-        int randomNum = Random.Range(min, max);
+        int randomNum = 2;//Random.Range(min, max);
         enemyShipsSObj = new List<EnemyShip>();
         for(int i = 0; i < randomNum; i++)
         {
@@ -38,6 +38,7 @@ public class EnemyShipManager : MonoBehaviour
 
             e.CurrentBody = Instantiate(e.baseBody, pos, Quaternion.identity);
             e.CurrentBody.GetComponent<SpriteRenderer>().flipX = !e.goingLeft;
+            e.CurrentBody.name = "Boat " + i;
         }
     }
 
@@ -60,7 +61,11 @@ public class EnemyShipManager : MonoBehaviour
                 e.CurrentBody.GetComponent<SpriteRenderer>().flipX = !e.goingLeft;
             }
 
-            if (!e.loadingAttack) StartCoroutine(e.Fire());
+            if (e.loadingAttack == null)
+            {
+                e.loadingAttack = e.Fire();
+                StartCoroutine(e.loadingAttack);
+            }
         }
         if(dead == enemyShipsSObj.Count) ReturnToLookOut();
     }
